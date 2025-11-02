@@ -89,7 +89,6 @@ public class BushBlock extends PlantBlock implements Fertilizable {
         }
     }
 
-    @Override
     protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
         if (!(entity instanceof LivingEntity))
             return;
