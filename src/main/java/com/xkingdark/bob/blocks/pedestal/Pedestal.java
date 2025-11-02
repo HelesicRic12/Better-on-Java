@@ -82,7 +82,6 @@ public class Pedestal extends BlockWithEntity {
         return true;
     };
 
-    @Override
     protected int getComparatorOutput(BlockState state, World world, BlockPos pos) {
         return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
     };
