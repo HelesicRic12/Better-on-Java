@@ -34,7 +34,7 @@ public record WaystoneHandlePacket(
 
     public static void handle(WaystoneHandlePacket payload, ServerPlayNetworking.Context context) {
         ServerPlayerEntity player = context.player();
-        World world = player.getWorld();
+        World world = player.getEntityWorld();
 
         ItemStack mainHand = player.getMainHandStack();
         BlockState state = world.getBlockState(payload.blockPos);

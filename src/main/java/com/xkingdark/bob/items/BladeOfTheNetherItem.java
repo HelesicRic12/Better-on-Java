@@ -21,7 +21,7 @@ public class BladeOfTheNetherItem extends Item {
     public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         super.postDamageEntity(stack, target, attacker);
 
-        World world = attacker.getWorld();
+        World world = attacker.getEntityWorld();
         int TicksPerSecond = MathHelper.floor(world.getTickManager().getTickRate());
         target.setOnFireForTicks(6 * TicksPerSecond);
     };

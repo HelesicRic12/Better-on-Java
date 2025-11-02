@@ -102,7 +102,7 @@ public class BushBlock extends PlantBlock implements Fertilizable {
             return;
 
         if (world instanceof ServerWorld serverWorld && state.get(AGE) != 0) {
-            Vec3d vec3d = entity.isControlledByPlayer() ? entity.getMovement() : entity.getLastRenderPos().subtract(entity.getPos());
+            Vec3d vec3d = entity.isControlledByPlayer() ? entity.getMovement() : entity.getLastRenderPos().subtract(entity.getEntityPos());
             if (vec3d.horizontalLengthSquared() > 0.0) {
                 double d = Math.abs(vec3d.getX());
                 double e = Math.abs(vec3d.getZ());

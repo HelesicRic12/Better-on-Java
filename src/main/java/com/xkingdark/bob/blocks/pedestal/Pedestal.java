@@ -38,7 +38,7 @@ public class Pedestal extends BlockWithEntity {
 
     @Override
     public ActionResult.Success onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (world.isClient)
+        if (world.isClient())
             return ActionResult.SUCCESS;
 
         if (!(world.getBlockEntity(pos) instanceof PedestalBlockEntity blockEntity))

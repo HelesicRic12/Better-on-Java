@@ -86,7 +86,7 @@ public class LivingEntityRendererMixin <T extends LivingEntity, S extends Living
 
         boolean bl = this.isVisible(livingEntityRenderState);
         boolean bl2 = !bl && !livingEntityRenderState.invisibleToPlayer;
-        RenderLayer renderLayer = this.getRenderLayer(livingEntityRenderState, bl, bl2, livingEntityRenderState.hasOutline);
+        RenderLayer renderLayer = this.getRenderLayer(livingEntityRenderState, bl, bl2, livingEntityRenderState.hasOutline());
         if (renderLayer != null) {
             VertexConsumer vertexConsumer;
             if (this.isEnchanted) {

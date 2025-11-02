@@ -4,6 +4,7 @@ import com.xkingdark.bob.items.Items;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LazyEntityReference;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ProjectileDeflection;
 import net.minecraft.entity.damage.DamageSource;
@@ -64,7 +65,7 @@ public class SpearEntity extends PersistentProjectileEntity {
         int i = this.dataTracker.get(LOYALTY);
         if (i > 0 && (this.dealtDamage || this.isNoClip()) && entity != null) {
             if (!this.isOwnerAlive()) {
-                if (this.getWorld() instanceof ServerWorld serverWorld
+                if (this.getEntityWorld() instanceof ServerWorld serverWorld
                     && this.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED
                 ) this.dropStack(serverWorld, this.asItemStack(), 0.1F);
 
@@ -73,7 +74,7 @@ public class SpearEntity extends PersistentProjectileEntity {
             else {
                 if (
                     !(entity instanceof PlayerEntity)
-                        && this.getPos().distanceTo(entity.getEyePos()) < (double)entity.getWidth() + 1.0
+                        && this.getEntityPos().distanceTo(entity.getEyePos()) < (double)entity.getWidth() + 1.0
                 ) {
                     this.discard();
                     return;
@@ -81,7 +82,7 @@ public class SpearEntity extends PersistentProjectileEntity {
 
                 this.setNoClip(true);
 
-                Vec3d vec3d = entity.getEyePos().subtract(this.getPos());
+                Vec3d vec3d = entity.getEyePos().subtract(this.getEntityPos());
                 this.setPos(this.getX(), this.getY() + vec3d.y * 0.015 * i, this.getZ());
                 this.setVelocity(
                     this.getVelocity()
@@ -128,7 +129,7 @@ public class SpearEntity extends PersistentProjectileEntity {
     };
 
     private byte getLoyalty(ItemStack stack) {
-        return this.getWorld() instanceof ServerWorld serverWorld
+        return this.getEntityWorld() instanceof ServerWorld serverWorld
             ? (byte) MathHelper.clamp(EnchantmentHelper.getTridentReturnAcceleration(serverWorld, stack, this), 0, 127)
             : 0;
     };
@@ -221,7 +222,7 @@ public class SpearEntity extends PersistentProjectileEntity {
         Entity owner = this.getOwner();
 
         DamageSource damageSource = this.getDamageSources().trident(this, (owner == null ? this : owner));
-        if (this.getWorld() instanceof ServerWorld serverWorld) {
+        if (this.getEntityWorld() instanceof ServerWorld serverWorld) {
             f = EnchantmentHelper.getDamage(serverWorld, this.getWeaponStack(), entity, damageSource, f);
         };
 
@@ -230,7 +231,7 @@ public class SpearEntity extends PersistentProjectileEntity {
             if (entity.getType() == EntityType.ENDERMAN)
                 return;
 
-            if (this.getWorld() instanceof ServerWorld serverWorld) {
+            if (this.getEntityWorld() instanceof ServerWorld serverWorld) {
                 EnchantmentHelper.onTargetDamaged(serverWorld, entity, damageSource, this.getWeaponStack(),
                     (item) -> this.kill(serverWorld));
             };
@@ -241,7 +242,8 @@ public class SpearEntity extends PersistentProjectileEntity {
             };
         };
 
-        this.deflect(ProjectileDeflection.SIMPLE, entity, this.getOwner(), false);
+        //this.deflect(ProjectileDeflection.SIMPLE, entity, this.getOwner(), false);
+        this.deflect(ProjectileDeflection.SIMPLE, entity, LazyEntityReference.of(this.getOwner()), false);
         this.setVelocity(this.getVelocity().multiply(0.02, 0.2, 0.02));
         this.playSound(SoundEvents.ITEM_TRIDENT_HIT, 1.0F, 1.0F);
     };

@@ -40,7 +40,7 @@ public class LampBlock extends Block {
 
     @Override
     protected void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             boolean isLit = state.get(LIT);
             if (isLit != world.isReceivingRedstonePower(pos)) {
                 if (isLit) {

@@ -79,7 +79,7 @@ public class WaystoneBlock extends Block implements Waterloggable {
 
     @Override
     public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (!world.isClient) {
+        if (!world.isClient()) {
             if (player.isCreative()) {
                 onBreakInCreative(world, pos, state, player);
             } else {
