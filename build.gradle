@@ -53,14 +53,14 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.release = 21
+    it.options.release = 25
 }
 
 java {
     withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {
@@ -70,13 +70,7 @@ jar {
         rename { "${it}_${inputs.properties.archivesName}" }
     }
 }
-// Ensure compile tasks don't ask for an unsupported release and enable preview if needed
-tasks.withType(JavaCompile).configureEach {
-    options.release = 21
-    // If your code uses preview language features (unnamed variables etc), enable preview:
-    // Remove the next line if you do not use preview features.
-    options.compilerArgs += ['--enable-preview']
-}
+
 // configure the maven publication
 publishing {
     publications {
