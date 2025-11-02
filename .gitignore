@@ -1,7 +1,7 @@
 build/
 bin/
 run/
-
+.vscode/
 .gradle/
 .idea/*
 !.idea/codeStyles
