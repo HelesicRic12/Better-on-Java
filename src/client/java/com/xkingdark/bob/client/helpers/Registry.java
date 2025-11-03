@@ -29,7 +29,7 @@ public class Registry {
 
         try {
             Class.forName(Keybinds.class.getName());
-        } catch (ClassNotFoundException _) {};
+        } catch (ClassNotFoundException DEFAULT) {};
         Events.register();
     };
 

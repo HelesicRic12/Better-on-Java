@@ -11,13 +11,13 @@ public class Registry {
     public static void initialize() {
         try {
             Class.forName(Items.class.getName());
-        } catch (ClassNotFoundException _) {};
+        } catch (ClassNotFoundException DEFAULT) {};
         try {
             Class.forName(Blocks.class.getName());
-        } catch (ClassNotFoundException _) {};
+        } catch (ClassNotFoundException DEFAULT) {};
         try {
             Class.forName(SoundEvents.class.getName());
-        } catch (ClassNotFoundException _) {};
+        } catch (ClassNotFoundException DEFAULT) {};
 
         ItemGroups.register();
         Events.register();

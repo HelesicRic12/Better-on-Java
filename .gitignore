@@ -6,3 +6,4 @@ run/
 .idea/*
 !.idea/codeStyles
 !.idea/icon.png
+/.vscode
